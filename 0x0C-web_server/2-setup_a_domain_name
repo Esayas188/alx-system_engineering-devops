@@ -1,1 +1,22 @@
-studentair.tech
+#!/usr/bin/env bash
+
+# Replace DOMAIN_NAME with your .TECH domain name
+DOMAIN_NAME="example.tech"
+
+# Install dig
+sudo apt-get update
+sudo apt-get install -y dnsutils
+
+# Configure DNS records with an A entry
+sudo sed -i "/server_name _;/a\\\n\tlocation /redirect_me {\n\t\treturn 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n\t}" /etc/nginx/sites-available/default
+
+# Get the IP address of web-01
+IP_ADDRESS=$(dig +short web-01)
+
+# Configure DNS records with an A entry
+sudo sed -i "s/server_name _;/server_name $DOMAIN_NAME;\n\treturn 301 https:\/\/$DOMAIN_NAME\$request_uri;\n}\n\nserver {\n\tlisten 80;\n\tlisten [::]:80;\n\tserver_name www.$DOMAIN_NAME;\n\treturn 301 https:\/\/$DOMAIN_NAME\$request_uri;\n}\n\nserver {\n\tlisten 443 ssl http2;\n\tlisten [::]:443 ssl http2;\n\tserver_name www.$DOMAIN_NAME;\n\tssl_certificate \/etc\/ssl\/ssl.crt;\n\tssl_certificate_key \/etc\/ssl\/ssl.key;\n\treturn 301 https:\/\/$DOMAIN_NAME\$request_uri;\n}\n\nserver {\n\tlisten 443 ssl http2;\n\tlisten [::]:443 ssl http2;\n\tserver_name $DOMAIN_NAME;\n\tssl_certificate \/etc\/ssl\/ssl.crt;\n\tssl_certificate_key \/etc\/ssl\/ssl.key;\n\tadd_header X-Served-By \$hostname;\n\tlocation \/ {\n\t\tproxy_pass http:\/\/$IP_ADDRESS:80;\n\t\tproxy_set_header Host \$host;\n\t\tproxy_set_header X-Real-IP \$remote_addr;\n\t\tproxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;\n\t\tproxy_set_header X-Forwarded-Proto \$scheme;\n\t}\n}\n\n/g" /etc/nginx/sites-available/default
+
+# Restart Nginx
+sudo service nginx restart
+
+echo $DOMAIN_NAME
