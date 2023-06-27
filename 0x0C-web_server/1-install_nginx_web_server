@@ -1,9 +1,21 @@
 #!/usr/bin/env bash
-# nginx web server listening on port 80
-# returns a page that contains the string "Hello World!"
 
-sudo apt update -y
-sudo apt install -y nginx
-echo 'Hello World!' > /var/www/html/index.nginx-debian.html
-sudo sed -i '38\rewrite ^/redirect_me https://www/youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
-sudo service nginx start
+# Install Nginx and redirect all output to /dev/null
+sudo apt-get update
+sudo apt-get install -y nginx > /dev/null 2>&1
+
+# Configure Nginx to listen on port 80
+sudo sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
+
+# Create a new HTML file with the "Hello World!" content
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
+
+# Restart Nginx
+sudo /etc/init.d/nginx restart
+
+# Test Nginx by querying its root with curl
+if curl localhost | grep -q "Hello World!"; then
+  echo "Nginx is working properly"
+else
+  echo "Something went wrong"
+fi
