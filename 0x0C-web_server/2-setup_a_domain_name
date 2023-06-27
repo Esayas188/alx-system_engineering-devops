@@ -16,4 +16,4 @@ sudo sed -i "s/server_name _;/server_name $DOMAIN_NAME;\n\treturn 301 https:\/\/
 # Restart Nginx
 sudo service nginx restart
 
-echo $DOMAIN_NAME
+echo "$DOMAIN_NAME"
