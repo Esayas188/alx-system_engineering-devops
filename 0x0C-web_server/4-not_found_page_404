@@ -1,26 +1,9 @@
-bash
 #!/usr/bin/env bash
+# nginx web server listening on port 80
+# returns a page that contains the string "Hello World!"
 
-# Install Nginx
-sudo apt-get update
-sudo apt-get install -y nginx
-
-# Configure Nginx to listen on port 80 and return "Hello World!"
-sudo echo "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    root /var/www/html;
-    index index.html index.htm;
-
-    server_name _;
-
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
-        echo 'Ceci n\'est pas une page';
-    }
-}" > /etc/nginx/sites-available/default
-
-# Restart Nginx
-sudo service nginx restart
+sudo apt update -y
+sudo apt install -y nginx
+echo 'Hello World!' > /var/www/html/index.nginx-debian.html
+sudo sed -i '38\rewrite ^/redirect_me https://www/youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+sudo service nginx start
