@@ -47,5 +47,5 @@ frontend studentair-frontend-https
 
 backend studentair-backend
         balance roundrobin
-        server 64803-web-01 54.160.102.194:80 check
-        server 64803-web-02 54.236.47.222:80 check
+        server 109863-web-01 34.207.154.187 check
+        server 109863-web-02 54.210.243.85 check
