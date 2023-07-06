@@ -1,13 +1,7 @@
-#!/bin/bash
-
-# Start Nginx if it is not running
-sudo service nginx status || sudo service nginx start
-
-# Check and update Nginx configuration
-sudo grep -q "listen 80 default_server;" /etc/nginx/sites-enabled/default || sudo sed -i "s/listen\s*80;/listen 80 default_server;/" /etc/nginx/sites-enabled/default
-
-# Stop any services running on port 80
-sudo lsof -i :80 | grep LISTEN | awk '{print $2}' | xargs sudo kill -9
-
-# Allow incoming traffic on port 80
-sudo ufw status | grep -q "80/tcp\s*ALLOW" || sudo ufw allow 80/tcp
+#!/usr/bin/env bash
+# script to fix nginx server that won't shut off via daemon manager
+mv /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+cp /etc/nginx/sites-enabled/default /etc/nginx/sites-available/default 
+service nginx stop
+pkill nginx
+service nginx start
