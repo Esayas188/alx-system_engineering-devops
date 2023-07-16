@@ -1,0 +1,35 @@
+://www.google.com ↗](https://www.google.com) into your browser and press Enter, your browser begins a journey that involves several steps. This journey is a fundamental process that occurs each time you visit any website, and it is important to understand the steps involved to have a better understanding of how the web stack works on top of the internet.
+
+Here are the main steps involved:
+
+1. DNS request
+The first step is the DNS request. The Domain Name System (DNS) translates the domain name “google.com” into an IP address that the browser can understand. Your browser sends a DNS request to a DNS server to resolve the IP address of the server that hosts the website. The DNS server responds with the IP address of the server.
+
+2. TCP/IP
+Once the IP address has been resolved, your browser establishes a TCP/IP (Transmission Control Protocol/Internet Protocol) connection with the server that hosts the website. This connection allows your browser to communicate with the server.
+
+3. Firewall
+Before the connection is established, your browser must pass through a firewall. The firewall is a security mechanism that filters incoming and outgoing traffic and ensures that only authorized traffic is allowed to pass through.
+
+4. HTTPS/SSL
+After the TCP/IP connection is established, the browser and the server negotiate a secure connection using HTTPS (Hypertext Transfer Protocol Secure) and SSL (Secure Sockets Layer) protocols. These protocols ensure that the data transmitted between the browser and the server is encrypted and secure.
+
+5. Load-balancer
+If the website is hosted on multiple servers, a load-balancer is used to distribute the traffic across all the servers. The load-balancer ensures that no single server is overloaded with traffic, and that the traffic is evenly distributed across all the servers.
+
+6. Web server
+Once the connection is established and the traffic is distributed, the browser sends an HTTP (Hypertext Transfer Protocol) request to the web server. The web server is responsible for processing the request and returning an HTTP response.
+
+7. Application server
+If the website has dynamic content, the web server sends the request to an application server that processes the request and generates the dynamic content. The application server may also retrieve data from a database and generate HTML pages.
+
+8. Database
+If the website requires data storage, the application server retrieves data from a database and generates HTML pages that are sent back to the web server. The web server then sends the HTML pages to the browser, which renders them to display the website.
+
+In conclusion, the journey that your browser goes through when you type [https://www.google.com ↗](https://www.google.com) into the address bar is a complex process that involves several steps. Understanding each step is important for anyone who wants to have a better understanding of how the web stack works on top of the internet.
+
+
+
+
+
+
